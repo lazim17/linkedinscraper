@@ -74,13 +74,17 @@ def get_profile_data():
             EC.presence_of_element_located((By.CSS_SELECTOR, "p.break-words.white-space-pre-wrap.t-black--light.text-body-medium"))
         ).text
 
+        logo = driver.find_element(By.XPATH, "//div[@class='org-top-card-primary-content__logo-container']//img")
+        logo_url = logo.get_attribute("src")
+
         company_data = {
             "name": name,
             "industry": industry,
             "location": location,
             "followers": followers,
             "company_size": company_size,
-            "description": desc
+            "description": desc,
+            "logo": logo
         }
 
         companies_collection.insert_one(company_data)
