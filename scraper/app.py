@@ -87,8 +87,11 @@ def get_profile_data():
             "logo": logo
         }
 
-        companies_collection.insert_one(company_data)
-
+        companies_collection.update_one(
+            {"name": name},
+            {"$set": company_data},
+            upsert=True  
+        )
         print(f"Company: {name}")
         print(f"Industry: {industry}")
         print(f"Location: {location}")
