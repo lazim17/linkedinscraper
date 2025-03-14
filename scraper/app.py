@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 
 #mongo_client = MongoClient(f"mongodb://{os.getenv("MONGO_USER")}:{os.getenv("MONGO_PASSWORD")}@{os.getenv("MONGO_HOST")}:{os.getenv("MONGO_PORT")}/")
-mongo_client = MongoClient("mongodb://localhost:27017/")
+mongo_client = MongoClient(os.getenv("MONGO_URI"))
 
 
 db = mongo_client["linkedin_data"]
@@ -84,7 +84,7 @@ def get_profile_data():
             "followers": followers,
             "company_size": company_size,
             "description": desc,
-            "logo": logo
+            "logo": logo_url
         }
 
         companies_collection.update_one(
